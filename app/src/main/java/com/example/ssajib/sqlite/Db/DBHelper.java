@@ -64,9 +64,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getData(int id) {
+    public Cursor getData(int studentId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from "+TABLE_STUDENT_NAME+" where id="+id+"", null );
+        Cursor res =  db.rawQuery( "select * from "+TABLE_STUDENT_NAME+" where "+STUDENT_COLUMN_ID+" ="+studentId+"", null );
         return res;
     }
 
@@ -92,11 +92,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public Integer deleteStudent (Integer id) {
+    public Integer deleteStudent (Integer studentId) {
         SQLiteDatabase db = this.getWritableDatabase();
         try{
             return db.delete(""+TABLE_STUDENT_NAME+""," "+STUDENT_COLUMN_ID+" = ? ",
-                    new String[] { Integer.toString(id) });
+                    new String[] { Integer.toString(studentId) });
         }
         catch (SQLException e){
             return -1;
